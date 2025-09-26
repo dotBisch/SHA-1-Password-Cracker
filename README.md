@@ -97,8 +97,43 @@ This implementation is ready for deployment on platforms like Railway. The code 
 
 This tool is for educational and legitimate security testing purposes only. Always ensure you have proper authorization before attempting to crack passwords.
 
+## Railway Deployment
+
+This project is ready for deployment on Railway. The web server runs on the port specified by Railway's `PORT` environment variable.
+
+### Files for Deployment
+- `app.py` - Flask web server
+- `requirements.txt` - Python dependencies  
+- `Procfile` - Railway deployment configuration
+
+### API Endpoints
+
+- `GET /` - Web interface for testing
+- `POST /crack` - Crack a password hash
+- `GET /health` - Health check endpoint
+
+### API Usage
+
+```bash
+curl -X POST https://your-app.railway.app/crack \
+  -H "Content-Type: application/json" \
+  -d '{"hash": "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8", "use_salts": false}'
+```
+
+Response:
+```json
+{
+  "hash": "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8",
+  "result": "password",
+  "use_salts": false,
+  "success": true
+}
+```
+
 ## Requirements
 
 - Python 3.6+
+- Flask 2.3.3
+- gunicorn 21.2.0
 - hashlib (built-in)
 - unittest (built-in)
